@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/styles/reset.css">
+    <link rel="stylesheet" href="/assets/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+    <title>Administração</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Administração</h1> 
+        </div>              
+    </header>
+
+    <main>
+        <aside>
+            <ul>
+                <li>
+                    <button>Acessos Administrativos</button>
+                </li>
+                <li>
+                    <button>Serviços</button>
+                </li>
+                <li>
+                    <button>Fale Conosco</button>
+                </li>
+                <li>
+                    <button>Reporte</button>
+                </li>
+                <li>
+                    <button>Pesquisa de Satisfação</button>
+                </li>
+                <li>
+                    <button>Prédios</button>
+                </li>
+                <li>
+                    <button>Locais de Trabalho</button>
+                </li>                
+            </ul>
+        </aside>
+
+        <section>
+            <h1>Locais de Trabalho</h1>
+            <form>
+                <span>
+                    <label for="funcionario">Funcionário</label><br>
+                    <input type="text" name="funcionario" id="funcionario"><br>
+                </span>
+                <span>
+                    <label for="predio">Prédio</label><br>
+                    <select name="predio" id="predio">
+                        <option value="null"></option>
+                        <option value="predio1">Prédio 1</option>
+                        <option value="predio2">Prédio 2</option>
+                        <option value="predio3">Prédio 3</option>                        
+                    </select>
+                </span>                
+                <span>
+                    <label for="local">Local de Trabalho</label><br>
+                    <input type="text" name="local" id="local">
+                </span>
+                <span>
+                    <label for="submit"></label><br>
+                    <input placeholder="" value="+" type="submit" id="submit">
+                </span>
+               
+            </form>
+            
+            <div id="tableContainer">
+                <table>
+                    <tr>
+                        <th>Funcionário</th>
+                        <th>Prédio</th>
+                        <th>Local de Trabalho</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Alfreds Futterkiste</td>
+                        <td>Prédio 1</td>
+                        <td>Alemanha</td>
+                        <td id="editContainer">
+                            <ion-icon class="editIcon" name="create"></ion-icon>
+                            <ion-icon class="deleteIcon" name="trash"></ion-icon>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Maria Anders</td>
+                        <td>Prédio 2</td>
+                        <td>Canadá</td>
+                        <td id="editContainer">
+                            <ion-icon class="editIcon" name="create"></ion-icon>
+                            <ion-icon class="deleteIcon" name="trash"></ion-icon>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Helen Bennett</td>
+                        <td>Prédio 3</td>
+                        <td>Itália</td>
+                        <td id="editContainer">
+                            <ion-icon class="editIcon" name="create"></ion-icon>
+                            <ion-icon class="deleteIcon" name="trash"></ion-icon>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+
+
+
+    <script src="/assets/scripts/index.js"></script>
+</body>
+</html>
