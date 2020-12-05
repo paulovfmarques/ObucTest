@@ -88,7 +88,7 @@ section form {
     display: flex;
 }
 
-section form label {
+section form label{
     font-size: 1rem;
     font-style: italic;
     color: rgb(112, 128, 144, 0.75);
@@ -117,13 +117,13 @@ section form label {
 }
 
 #tableContainer {
-    width: 46.7vw;
+    width: 60.2rem;
     height: 55vh;
+    margin-top: 2rem; 
     overflow-y: scroll;    
 }
 
-table {
-    margin-top: 1rem;    
+table {       
     border-collapse: collapse;
     width: 100%;
 }
@@ -134,16 +134,51 @@ td, th {
     padding: 8px;
 }
 
+td > input {
+    border: none;
+    color: black;    
+    background-color: inherit;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.editable{
+    border: none;
+    background-color: inherit;
+    max-width:60%;
+    color: black;    
+    font-size: 1rem;
+}
+
+.enabled{
+    border: 1px solid black;
+    color: black;    
+    background-color: white;
+    text-align: center;
+    font-size: 1rem;
+}
+
 th {
     font-style: italic;
     background-color: rgb(18,55,79);
     color: white;
 }
 
+th:last-child{
+    width: 5rem;
+}
+
+th:nth-child(2){
+    width: 3rem;
+}
+
 tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-#editContainer {
-    color: rgb(18,55,79);
+.edit-container ion-icon{     
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 5px;    
+    color: rgb(18,55,79); 
 }

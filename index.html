@@ -45,23 +45,23 @@
 
         <section>
             <h1>Locais de Trabalho</h1>
-            <form>
+            <form id="workPlaceForm" onsubmit="insertData()">
                 <span>
                     <label for="funcionario">Funcionário</label><br>
-                    <input type="text" name="funcionario" id="funcionario"><br>
+                    <input type="text" name="funcionario" id="funcionario" required><br>
                 </span>
                 <span>
                     <label for="predio">Prédio</label><br>
-                    <select name="predio" id="predio">
-                        <option value="null"></option>
-                        <option value="predio1">Prédio 1</option>
-                        <option value="predio2">Prédio 2</option>
-                        <option value="predio3">Prédio 3</option>                        
+                    <select name="predio" id="predio" required >
+                        <option value="" selected disabled hidden>Escolha aqui...</option>
+                        <option value="Prédio 1">Prédio 1</option>
+                        <option value="Prédio 2">Prédio 2</option>
+                        <option value="Prédio 3">Prédio 3</option>                        
                     </select>
                 </span>                
                 <span>
                     <label for="local">Local de Trabalho</label><br>
-                    <input type="text" name="local" id="local">
+                    <input type="text" name="local" id="local" required>
                 </span>
                 <span>
                     <label for="submit"></label><br>
@@ -71,40 +71,13 @@
             </form>
             
             <div id="tableContainer">
-                <table>
+                <table id="workPlaceTable">
                     <tr>
                         <th>Funcionário</th>
                         <th>Prédio</th>
                         <th>Local de Trabalho</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Prédio 1</td>
-                        <td>Alemanha</td>
-                        <td id="editContainer">
-                            <ion-icon class="editIcon" name="create"></ion-icon>
-                            <ion-icon class="deleteIcon" name="trash"></ion-icon>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Maria Anders</td>
-                        <td>Prédio 2</td>
-                        <td>Canadá</td>
-                        <td id="editContainer">
-                            <ion-icon class="editIcon" name="create"></ion-icon>
-                            <ion-icon class="deleteIcon" name="trash"></ion-icon>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Helen Bennett</td>
-                        <td>Prédio 3</td>
-                        <td>Itália</td>
-                        <td id="editContainer">
-                            <ion-icon class="editIcon" name="create"></ion-icon>
-                            <ion-icon class="deleteIcon" name="trash"></ion-icon>
-                        </td>
-                    </tr>
+                        <th>Editar/Deletar</th>
+                    </tr>                    
                 </table>
             </div>
         </section>
@@ -113,6 +86,6 @@
 
 
 
-    <script src="/assets/scripts/index.js"></script>
+    <script type="module" src="/assets/scripts/index.mjs"></script>    
 </body>
 </html>
