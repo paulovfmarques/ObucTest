@@ -6,23 +6,25 @@ import {
   renderConfirm,
 } from "./controllers/renderController.mjs";
 
-let inputValues = {};
+let inputValues = {}; //Stores the current input data when editing a row. 
 
+//Event listener to catch on the clicked icons
 const table = document.getElementById("workPlaceTable");
 table.addEventListener("click", editHandler);
+
 document.getElementById("workPlaceForm").onsubmit = function (e) {
   insertData(e);
 };
 
-const localStorageRows = JSON.parse(localStorage.getItem("arrLocaisTrabalho"));
-let rows =
-  localStorageRows && localStorageRows.length > 0 ? localStorageRows : [];
+//Data initialization from localStorage 
+const storedRows = JSON.parse(localStorage.getItem("arrLocaisTrabalho"));
+let rows = storedRows && storedRows.length > 0 ? storedRows : [];
 
 renderFromStorage(rows, table);
 
 function insertData(e) {
   e.preventDefault();
-  
+
   let formData = new FormData(document.getElementById("workPlaceForm"));
   let rowObj = renderAfterInsert(formData, rows, table);
 
@@ -32,32 +34,47 @@ function insertData(e) {
 
 function editHandler(e) {
   const row = e.target;
+  const iconType = row.classList[0];
 
-  if (row.classList[0] === "delete-icon") {
-    const item = row.parentNode.parentNode;
-    let id = parseInt(item.getAttribute("id"));
-
-    rows = rows.filter((r) => r.id !== id);
-    localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
-
-    item.remove();
+  switch (iconType) {
+    case "delete-icon":
+      deleteIconHandler(row);
+      break;
+    case "edit-icon":
+      editIconHandler(row);
+    case "discard-icon":
+      discardIconHandler(row);
+      break;
+    case "confirm-icon":
+      confirmIconHandler(row);
+      break;
+    default:
+      break;
   }
+}
 
-  if (row.classList[0] === "edit-icon") {
-    inputValues = renderEdit(row, inputValues);
-  }
+function deleteIconHandler(row) {
+  const item = row.parentNode.parentNode;
+  let id = parseInt(item.getAttribute("id"));
+  rows = rows.filter((r) => r.id !== id);
+  localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
+  item.remove();
+}
 
-  if (row.classList[0] === "discard-icon") {
-    renderDiscard(row, inputValues);
-  }
+function editIconHandler(row) {
+  inputValues = renderEdit(row, inputValues);
+}
 
-  if (row.classList[0] === "confirm-icon") {
-    const { id, updatedValues } = renderConfirm(row);
+function discardIconHandler(row) {
+  renderDiscard(row, inputValues);
+}
 
-    rows = rows.filter((r) => r.id !== id);
-    rows.push(updatedValues);
-    rows = rows.sort((a, b) => a.id - b.id);
+function confirmIconHandler(row) {
+  const { id, updatedValues } = renderConfirm(row);
 
-    localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
-  }
+  rows = rows.filter((r) => r.id !== id);
+  rows.push(updatedValues);
+  rows = rows.sort((a, b) => a.id - b.id);
+
+  localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
 }

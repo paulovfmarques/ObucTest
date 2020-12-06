@@ -24,6 +24,10 @@ export function renderAfterInsert(formData, rows, table) {
 
   createRow(rowObj, table);
 
+  document.getElementById("funcionario").value = "";
+  document.getElementById("predio").value = "";
+  document.getElementById("local").value = "";
+
   return rowObj;
 }
 
