@@ -119,10 +119,10 @@ section form label {
 }
 
 #tableContainer {
-  width: 60.2rem;
+  width: 59.2rem;
   height: 55vh;
   margin-top: 2rem;
-  overflow-y: scroll;
+  overflow-y: auto;  
 }
 
 table {

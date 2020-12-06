@@ -21,8 +21,10 @@ let rows =
 renderFromStorage(rows, table);
 
 function insertData(e) {
+  e.preventDefault();
+  
   let formData = new FormData(document.getElementById("workPlaceForm"));
-  let rowObj = renderAfterInsert(formData, rows);
+  let rowObj = renderAfterInsert(formData, rows, table);
 
   rows.push(rowObj);
   localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
@@ -51,12 +53,11 @@ function editHandler(e) {
 
   if (row.classList[0] === "confirm-icon") {
     const { id, updatedValues } = renderConfirm(row);
-    rows = rows.filter((r) => r.id !== id);
-    rows.push(updatedValues)
 
+    rows = rows.filter((r) => r.id !== id);
+    rows.push(updatedValues);
     rows = rows.sort((a, b) => a.id - b.id);
 
-    console.log(rows)
     localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
   }
 }

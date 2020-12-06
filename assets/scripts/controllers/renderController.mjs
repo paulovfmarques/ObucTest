@@ -1,47 +1,12 @@
 export function renderFromStorage(rows, table) {
   if (rows && rows.length > 0) {
     for (let i = 0; i < rows.length; i++) {
-      let newRow = document.createElement("tr");
-      newRow.id = rows[i].id;
-
-      let newFuncionario = document.createElement("td");
-      newFuncionario.innerHTML = `<input disabled value=${rows[i].funcionario}>`;
-      newRow.appendChild(newFuncionario);
-
-      let newPredio = document.createElement("td");
-      newPredio.innerHTML = `
-      <select class="editable" name="predio" id="predio" required disabled >            
-            <option value="Prédio 1" ${
-              rows[i].predio === "Prédio 1" ? "selected" : ""
-            } >Prédio 1</option>
-            <option value="Prédio 2" ${
-              rows[i].predio === "Prédio 2" ? "selected" : ""
-            } >Prédio 2</option>
-            <option value="Prédio 3" ${
-              rows[i].predio === "Prédio 3" ? "selected" : ""
-            } >Prédio 3</option>                        
-      </select>`;
-      newRow.appendChild(newPredio);
-
-      let newLocal = document.createElement("td");
-      newLocal.innerHTML = `<input disabled value=${rows[i].local}>`;
-      newRow.appendChild(newLocal);
-
-      let editSection = document.createElement("td");
-      editSection.classList.add("edit-container");
-
-      editSection.innerHTML = `
-            <ion-icon class="edit-icon" name="create"></ion-icon>
-            <ion-icon class="delete-icon" name="trash"></ion-icon>
-        `;
-      newRow.appendChild(editSection);
-
-      table.appendChild(newRow);
+      createRow(rows[i], table);
     }
   }
 }
 
-export function renderAfterInsert(formData, rows) {
+export function renderAfterInsert(formData, rows, table) {
   let dataArr = [];
 
   const maxId = findMaxId(rows);
@@ -56,6 +21,8 @@ export function renderAfterInsert(formData, rows) {
     predio: dataArr[1],
     local: dataArr[2],
   };
+
+  createRow(rowObj, table);
 
   return rowObj;
 }
@@ -111,6 +78,45 @@ export function renderConfirm(row) {
   };
 
   return { id, updatedValues };
+}
+
+function createRow(inputValue, table) {
+  let newRow = document.createElement("tr");
+  newRow.id = inputValue.id;
+
+  let newFuncionario = document.createElement("td");
+  newFuncionario.innerHTML = `<input disabled value=${inputValue.funcionario}>`;
+  newRow.appendChild(newFuncionario);
+
+  let newPredio = document.createElement("td");
+  newPredio.innerHTML = `
+      <select class="editable" name="predio" id="predio" required disabled >            
+            <option value="Prédio 1" ${
+              inputValue.predio === "Prédio 1" ? "selected" : ""
+            } >Prédio 1</option>
+            <option value="Prédio 2" ${
+              inputValue.predio === "Prédio 2" ? "selected" : ""
+            } >Prédio 2</option>
+            <option value="Prédio 3" ${
+              inputValue.predio === "Prédio 3" ? "selected" : ""
+            } >Prédio 3</option>                        
+      </select>`;
+  newRow.appendChild(newPredio);
+
+  let newLocal = document.createElement("td");
+  newLocal.innerHTML = `<input disabled value=${inputValue.local}>`;
+  newRow.appendChild(newLocal);
+
+  let editSection = document.createElement("td");
+  editSection.classList.add("edit-container");
+
+  editSection.innerHTML = `
+            <ion-icon class="edit-icon" name="create"></ion-icon>
+            <ion-icon class="delete-icon" name="trash"></ion-icon>
+        `;
+  newRow.appendChild(editSection);
+
+  table.appendChild(newRow);
 }
 
 function returnLayout(row) {
