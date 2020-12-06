@@ -168,6 +168,7 @@ th {
   font-style: italic;
   background-color: rgb(18, 55, 79);
   color: white;
+  width: auto;
 }
 
 th:last-child {
@@ -183,4 +184,8 @@ tr:nth-child(even) {
   font-size: 20px;
   margin-left: 5px;
   color: rgb(18, 55, 79);
+}
+
+.hidden{
+  display: none;
 }

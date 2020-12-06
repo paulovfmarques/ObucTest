@@ -116,7 +116,7 @@ function createRow(inputValue, table) {
 
   editSection.innerHTML = `
             <ion-icon class="edit-icon" name="create"></ion-icon>
-            <ion-icon class="delete-icon" name="trash"></ion-icon>
+            <ion-icon data-target="simpleModal_7" data-toggle="modal" class="delete-icon" name="trash"></ion-icon>
         `;
   newRow.appendChild(editSection);
 
@@ -142,7 +142,7 @@ function returnLayout(row) {
 
   oldButtons.innerHTML = `
         <ion-icon class="edit-icon" name="create"></ion-icon>
-        <ion-icon class="delete-icon" name="trash"></ion-icon>
+        <ion-icon data-target="simpleModal_7" data-toggle="modal" class="delete-icon" name="trash"></ion-icon>
     `;
   return { item, inputName, selectOptions, inputLocal };
 }

@@ -6,7 +6,7 @@ import {
   renderConfirm,
 } from "./controllers/renderController.mjs";
 
-let inputValues = {}; //Stores the current input data when editing a row. 
+let inputValues = {}; //Stores the current input data when editing a row.
 
 //Event listener to catch on the clicked icons
 const table = document.getElementById("workPlaceTable");
@@ -16,7 +16,7 @@ document.getElementById("workPlaceForm").onsubmit = function (e) {
   insertData(e);
 };
 
-//Data initialization from localStorage 
+//Data initialization from localStorage
 const storedRows = JSON.parse(localStorage.getItem("arrLocaisTrabalho"));
 let rows = storedRows && storedRows.length > 0 ? storedRows : [];
 
@@ -38,7 +38,7 @@ function editHandler(e) {
 
   switch (iconType) {
     case "delete-icon":
-      deleteIconHandler(row);
+      addDeleteEvent(row);
       break;
     case "edit-icon":
       editIconHandler(row);
@@ -51,6 +51,11 @@ function editHandler(e) {
     default:
       break;
   }
+}
+
+function addDeleteEvent(row) {
+  const confirmDelete = document.getElementById("confirm-delete");
+  confirmDelete.addEventListener("click", () => deleteIconHandler(row));
 }
 
 function deleteIconHandler(row) {
