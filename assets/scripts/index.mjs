@@ -44,6 +44,7 @@ function editHandler(e) {
       break;
     case "edit-icon":
       editIconHandler(row);
+      break;
     case "discard-icon":
       discardIconHandler(row);
       break;
