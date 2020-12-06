@@ -88,9 +88,9 @@ function confirmIconHandler(row) {
 }
 
 function addSelectionEvent() {
-  const BtnNodeArray = document.querySelectorAll(".panel-btn");
+  const btnNodeArray = document.querySelectorAll(".panel-btn");
 
-  BtnNodeArray.forEach((btn) => {
+  btnNodeArray.forEach((btn) => {
     btn.addEventListener("click", (e) =>
       selectPanel(e.target.parentNode.children[0])
     );
