@@ -6,19 +6,21 @@ import {
   renderConfirm,
 } from "./controllers/renderController.mjs";
 
-let inputValues = {}; //Stores the current input data when editing a row.
+//Stores the current input data when editing a row.
+let inputValues = {};
 
 //Event listener to catch on the clicked icons
 const table = document.getElementById("workPlaceTable");
 table.addEventListener("click", editHandler);
 
-document.getElementById("workPlaceForm").onsubmit = function (e) {
-  insertData(e);
-};
+document.getElementById("workPlaceForm").onsubmit = (e) => insertData(e);
 
 //Data initialization from localStorage
 const storedRows = JSON.parse(localStorage.getItem("arrLocaisTrabalho"));
 let rows = storedRows && storedRows.length > 0 ? storedRows : [];
+
+//Enables the side menu selection
+addSelectionEvent();
 
 renderFromStorage(rows, table);
 
@@ -82,4 +84,26 @@ function confirmIconHandler(row) {
   rows = rows.sort((a, b) => a.id - b.id);
 
   localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
+}
+
+function addSelectionEvent() {
+  const BtnNodeArray = document.querySelectorAll(".panel-btn");
+
+  BtnNodeArray.forEach((btn) => {
+    btn.addEventListener("click", (e) =>
+      selectPanel(e.target.parentNode.children[0])
+    );
+  });
+}
+
+function selectPanel(btnNode) {
+  const panelNodeArray = document.querySelectorAll(".panel");  
+  
+  panelNodeArray.forEach(panel => {
+    if(btnNode.classList[1] !== panel.classList[1]){
+      panel.classList.add("hidden");
+    } else{
+      panel.classList.remove("hidden")
+    }
+  })
 }
