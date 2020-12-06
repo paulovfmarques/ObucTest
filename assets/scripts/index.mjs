@@ -1,7 +1,12 @@
 import {
   renderFromStorage,
   renderAfterInsert,
+  renderEdit,
+  renderDiscard,
+  renderConfirm,
 } from "./controllers/renderController.mjs";
+
+let inputValues = {};
 
 const table = document.getElementById("workPlaceTable");
 table.addEventListener("click", editHandler);
@@ -9,7 +14,7 @@ document.getElementById("workPlaceForm").onsubmit = function (e) {
   insertData(e);
 };
 
-const localStorageRows = JSON.parse(localStorage.getItem("row"));
+const localStorageRows = JSON.parse(localStorage.getItem("arrLocaisTrabalho"));
 let rows =
   localStorageRows && localStorageRows.length > 0 ? localStorageRows : [];
 
@@ -20,7 +25,7 @@ function insertData(e) {
   let rowObj = renderAfterInsert(formData, rows);
 
   rows.push(rowObj);
-  localStorage.setItem("row", JSON.stringify(rows));
+  localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
 }
 
 function editHandler(e) {
@@ -30,29 +35,28 @@ function editHandler(e) {
     const item = row.parentNode.parentNode;
     let id = parseInt(item.getAttribute("id"));
 
-    rows = rows.filter((row) => row.id !== id);
-    localStorage.setItem("row", JSON.stringify(rows));
+    rows = rows.filter((r) => r.id !== id);
+    localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
 
     item.remove();
   }
 
   if (row.classList[0] === "edit-icon") {
-    const item = row.parentNode.parentNode;
-    let id = parseInt(item.getAttribute("id"));
+    inputValues = renderEdit(row, inputValues);
+  }
 
-     
-    let inputName = item.children[0].children[0];
-    let selectOptions = item.children[1].children[0];
-    let inputLocal = item.children[2].children[0];
+  if (row.classList[0] === "discard-icon") {
+    renderDiscard(row, inputValues);
+  }
 
-    inputName.classList.add("enabled");
-    selectOptions.classList.add("enabled");
-    inputLocal.classList.add("enabled");
+  if (row.classList[0] === "confirm-icon") {
+    const { id, updatedValues } = renderConfirm(row);
+    rows = rows.filter((r) => r.id !== id);
+    rows.push(updatedValues)
 
-    inputName.disabled = false;
-    selectOptions.disabled = false;
-    inputLocal.disabled = false;
+    rows = rows.sort((a, b) => a.id - b.id);
 
-    console.log(inputLocal)
+    console.log(rows)
+    localStorage.setItem("arrLocaisTrabalho", JSON.stringify(rows));
   }
 }
